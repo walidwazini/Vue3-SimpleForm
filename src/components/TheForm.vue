@@ -1,6 +1,9 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control" :class="{invalid: userNameValidity === 'invalid'}" >
+    <div
+      class="form-control"
+      :class="{ invalid: userNameValidity === 'invalid' }"
+    >
       <label for="user-name">Your Name</label>
       <input
         id="user-name"
@@ -104,6 +107,9 @@
       />
       <label>Agree for terms ? </label>
     </div>
+    <div class="form-control">
+      <rating-control v-model="rating"  ></rating-control>
+    </div>
     <div>
       <button>Save Data</button>
     </div>
@@ -111,7 +117,9 @@
 </template>
 
 <script>
+import RatingControl from "./RatingControl.vue";
 export default {
+  components: { RatingControl },
   data() {
     return {
       userName: "",
@@ -120,13 +128,12 @@ export default {
       interest: [],
       how: null,
       confirm: false,
+      rating: null,
       userNameValidity: "pending",
     };
   },
   watch: {},
-  computed: {
-    
-  },
+  computed: {},
   methods: {
     submitForm() {
       console.log(this.userName);
@@ -146,6 +153,9 @@ export default {
       console.log("Confirm ? ");
       console.log(this.confirm);
       this.confirm = false;
+      console.log('Rating')
+      console.log(this.rating)
+      this.rating = null
     },
     validateInput() {
       if (this.userName === "") {
